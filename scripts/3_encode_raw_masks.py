@@ -5,8 +5,8 @@ from skimage.io import imread
 
 import data.preprocessing as preprocessing
 
-DEFAULT_INPUT_FOLDER = 'masks/raw'
-DEFAULT_OUTPUT_FOLDER = 'masks/encoded'
+DEFAULT_INPUT_FOLDER = 'masks/patches/raw/2048x2048'
+DEFAULT_OUTPUT_FOLDER = 'masks/patches/encoded/2048x2048'
 
 COPY = 'copy'
 RENAME = 'rename'
@@ -59,7 +59,7 @@ def run(
     for mask_raw_filename in os.listdir(input_directory):
         mask_filename_without_ext, _ = os.path.splitext(mask_raw_filename)
 
-        mask_encoded_filename = '{mask_filename_without_ext}.np' \
+        mask_encoded_filename = '{mask_filename_without_ext}' \
             .format(mask_filename_without_ext=mask_filename_without_ext)
 
         src_mask_raw_filename = os.path.join(input_directory, mask_raw_filename)

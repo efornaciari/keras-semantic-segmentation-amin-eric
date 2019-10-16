@@ -4,8 +4,8 @@ import fnmatch
 from shutil import copyfile
 
 MASK_PATTERN = '*_GT.jpg'
-DEFAULT_IMAGES_FOLDER = 'images'
-DEFAULT_MASKS_FOLDER = 'masks'
+DEFAULT_IMAGES_FOLDER = 'images/raw'
+DEFAULT_MASKS_FOLDER = 'masks/raw'
 
 COPY = 'copy'
 RENAME = 'rename'
