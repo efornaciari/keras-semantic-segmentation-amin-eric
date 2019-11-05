@@ -40,7 +40,7 @@ def one_hot_encode_rgb_masks(masks, encodings):
     num_classes = len(encodings)
     num_images, height, width = masks.shape[:-1]
 
-    one_hot_encoded_rgb_images = np.zeros((num_images, height, width, num_classes))
+    one_hot_encoded_rgb_images = np.zeros((num_images, height, width, num_classes), dtype=np.bool)
 
     for i in range(num_images):
         mask = masks[i, :, :, :]
