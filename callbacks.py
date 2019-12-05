@@ -23,7 +23,8 @@ class WeightVisualizerCallback(callbacks.Callback):
         self.mask_decoding_func = mask_decoding_func
 
     def on_epoch_end(self, epoch, logs={}):
-        predicted_masks = self.mask_decoding_func(self.model.predict(self.images))
+        decoded_predicted_masks = self.mask_decoding_func(self.model.predict(self.images))
+        decoded_masks = self.mask_decoding_func(self.masks)
         rows = self.images.shape[0]
         cols = 3
         fig, subplots = plt.subplots(rows, cols, figsize=self.figsize)
@@ -32,7 +33,7 @@ class WeightVisualizerCallback(callbacks.Callback):
             subplot.set_title(title)
         for row, row_subplots in enumerate(subplots):
             row_subplots[0].imshow(self.images[row, :, :, :])
-            row_subplots[1].imshow(np.squeeze(self.masks[row, :, :, :]))
-            row_subplots[2].imshow(np.squeeze(predicted_masks[row, :, :, :]))
+            row_subplots[1].imshow(np.squeeze(decoded_masks[row, :, :, :]))
+            row_subplots[2].imshow(np.squeeze(decoded_predicted_masks[row, :, :, :]))
         fig.tight_layout()
         plt.show()
