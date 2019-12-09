@@ -41,7 +41,7 @@ class OneHotEncoderDecoder:
     def encode(self, images):
         def rgb_to_one_hot(rgb):
             hashable_rgb = tuple(rgb)
-            if hashable_rgb not in self.one_hot_to_rbg:
+            if hashable_rgb not in self.rbg_to_one_hot:
                 return [0 for _ in range(len(self.encodings))]
             return self.rbg_to_one_hot[hashable_rgb]
         return np.apply_along_axis(rgb_to_one_hot, axis=-1, arr=images)
