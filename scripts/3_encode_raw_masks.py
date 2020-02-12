@@ -3,10 +3,10 @@ import argparse
 import numpy as np
 from skimage.io import imread
 
-import data.preprocessing as preprocessing
+import data.encodings as de
 
-DEFAULT_INPUT_FOLDER = 'masks/patches/raw/2048x2048'
-DEFAULT_OUTPUT_FOLDER = 'masks/patches/encoded/2048x2048'
+DEFAULT_INPUT_FOLDER = 'masks/patches/raw/1024x1024'
+DEFAULT_OUTPUT_FOLDER = 'masks/patches/encoded/1024x1024'
 
 COPY = 'copy'
 RENAME = 'rename'
@@ -49,6 +49,8 @@ def run(
     input_directory = os.path.join(base_directory, input_folder)
     output_directory = os.path.join(base_directory, output_folder)
 
+    ohed = de.OneHotEncoderDecoder(encodings=ENCODINGS)
+
     if not os.path.exists(input_directory):
         raise Exception('Input directory must exist: "{input_directory}"'
                         .format(input_directory=input_directory))
@@ -72,7 +74,7 @@ def run(
 
         if not dry_run:
             raw_masks = np.expand_dims(imread(src_mask_raw_filename), axis=0)
-            encoded_mask = preprocessing.one_hot_encode_rgb_masks(masks=raw_masks, encodings=ENCODINGS)
+            encoded_mask = ohed.encode(raw_masks)
             np.save(dst_mask_raw_filename, encoded_mask)
 
 

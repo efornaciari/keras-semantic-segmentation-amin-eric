@@ -6,19 +6,18 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 
 
 def main():
-    images_path = 'path/to/.../project/.../Project_2_Segmentation_reformatted/images/patches/raw/2048x2048/'
-    mask_path = 'path/to/.../project/Project_2_Segmentation_reformatted/masks/patches/encoded/2048x2048/'
+    images_path = '/Users/ericfornaciari/Desktop/data/images/patches/raw/1024x1024/'
+    masks_path = '/Users/ericfornaciari/Desktop/data/masks/patches/encoded/1024x1024/'
 
-    images = np.zeros((len(os.listdir(images_path)), 2048, 2048, 3), np.uint16)
-    masks = np.zeros((len(os.listdir(mask_path)), 2048, 2048, 6), np.bool)
+    images = np.zeros((len(os.listdir(images_path)), 1024, 1024, 3), np.uint16)
+    masks = np.zeros((len(os.listdir(masks_path)), 1024, 1024, 1), np.bool)
     for i, filename in enumerate(os.listdir(images_path)):
         images[i, :, :, :] = imread(os.path.join(images_path, filename))
-    for i, filename in enumerate(os.listdir(mask_path)):
-        masks[i, :, :, :] = np.load(os.path.join(mask_path, filename), allow_pickle=True)
+    for i, filename in enumerate(os.listdir(masks_path)):
+        masks[i, :, :, :] = np.load(os.path.join(masks_path, filename), allow_pickle=True)
 
-    unet = model.unet()
+    unet = model.unet(input_size=(1024, 1024, 3))
     unet.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-    unet = model.unet()
 
     earlystopper = EarlyStopping(patience=5, verbose=1)
     checkpointer = ModelCheckpoint('init.h5', verbose=1, save_best_only=True)

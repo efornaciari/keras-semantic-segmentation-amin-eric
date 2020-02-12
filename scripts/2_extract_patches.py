@@ -100,7 +100,7 @@ if __name__ == '__main__':
     arg_parser.add_argument("--input-mask-folder", default=DEFAULT_INPUT_MASK_FOLDER)
     arg_parser.add_argument("--output-image-folder", default=DEFAULT_OUTPUT_IMAGE_FOLDER)
     arg_parser.add_argument("--output-mask-folder", default=DEFAULT_OUTPUT_MASK_FOLDER)
-    arg_parser.add_argument("--patch-size", default=DEFAULT_PATCH_SIZE)
+    arg_parser.add_argument("--patch-size", default=DEFAULT_PATCH_SIZE, type=int)
     arg_parser.add_argument("--patches-per-image", default=DEFAULT_PATCHES_PER_IMAGE)
     arg_parser.add_argument("--seed", default=13)
     arg_parser.add_argument("--dry-run", action='store_true')
