@@ -1,8 +1,1 @@
-numpy
-keras
-tensorflow
-scikit-image
-jupyter
-matplotlib
-scikit-image
-sklearn
+pytest

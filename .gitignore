@@ -1,2 +1,4 @@
 .todo
 .idea/
+__pycache__
+src/segmentation/__pycache__/

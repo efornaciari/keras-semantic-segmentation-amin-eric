@@ -3,7 +3,7 @@ import argparse
 import numpy as np
 from skimage.io import imread
 
-import data.encodings as de
+import segmentation.data.encodings as de
 
 DEFAULT_INPUT_FOLDER = 'masks/patches/raw/1024x1024'
 DEFAULT_OUTPUT_FOLDER = 'masks/patches/encoded/1024x1024'
