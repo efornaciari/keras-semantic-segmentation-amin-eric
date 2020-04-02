@@ -56,9 +56,10 @@ class AveragePixelTypePerPatientReducer:
 
     def _build_reduce_function(self):
         def _curried_reduce_function(segmentation):
-            pixels, counts = np.unique(segmentation.reshape(-1, 3), return_counts=True, axis=0)
-            pixel_value_to_pixel_count = dict(zip([tuple(pixel) for pixel in pixels], list(counts)))
+            counted_pixel_values, counts = np.unique(segmentation.reshape(-1, 3), return_counts=True, axis=0)
+            pixel_value_to_pixel_count = dict(zip([tuple(counted_pixel_value) for counted_pixel_value in counted_pixel_values], list(counts)))
+            counted_pixel_types = [tuple(counted_pixel_value) for counted_pixel_value in counted_pixel_values.tolist()]
+            for missing_pixel_value in list(set(self.pixel_value_to_pixel_type.keys()) - set(counted_pixel_types)):
+                pixel_value_to_pixel_count[missing_pixel_value] = 0
             return {self.pixel_value_to_pixel_type[pixel_value]: pixel_count for pixel_value, pixel_count in pixel_value_to_pixel_count.items()}
         return _curried_reduce_function
-
-
