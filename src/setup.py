@@ -14,5 +14,6 @@ setup(
         'numpy',
         'pandas',
         'keras',
-        'tensorflow'
+        'tensorflow',
+        'seaborn',
     ])
